@@ -1,11 +1,21 @@
 <script>
-  let counter = 0;
+  let count = localStorage.getItem("annasCounter") || 0;
+
   let inputField = "";
 
-  const convertNumber = (e) => {
-    let result = 0;
+  const increment = (e) => {
+    count++;
+    localStorage.setItem("annasCounter", count);
+  };
+  const decrement = (e) => {
+    count--;
+    localStorage.setItem("annasCounter", count);
+  };
+
+  const setNumber = (e) => {
     if (e.key === "Enter") {
-      counter = Number(inputField);
+      count = isNaN(Number(inputField)) ? 0 : Number(inputField);
+      localStorage.setItem("annasCounter", count);
     }
   };
 </script>
@@ -29,18 +39,14 @@
 <div class="app">
   <h1 class="title">Annas komische Seite</h1>
   <div class="content">
-    <h2 class="counterShow">Counter: {counter}</h2>
-    <button
-      on:click={(e) => {
-        counter++;
-      }}>
-      +1
-    </button>
+    <h2 class="counterShow">Counter: {count}</h2>
+    <button on:click={increment}>+1</button>
+    <button on:click={decrement}>-1</button>
     <label for="counterSet">Set counter to:</label>
     <input
       type="text"
       id="counterSet"
       bind:value={inputField}
-      on:keypress={convertNumber} />
+      on:keypress={setNumber} />
   </div>
 </div>
