@@ -1,4 +1,6 @@
 <script>
+  // localStorage is a way to have "persistent" storage of simple infos
+  // even after closing the webapp.
   let count = localStorage.getItem("annasCounter") || 0;
 
   let inputField = "";
@@ -7,6 +9,7 @@
     count++;
     localStorage.setItem("annasCounter", count);
   };
+
   const decrement = (e) => {
     count--;
     localStorage.setItem("annasCounter", count);
@@ -27,19 +30,22 @@
     justify-content: space-around;
     text-align: center;
   }
+
+  .counterShow {
+    font-size: 4rem;
+  }
   button {
     width: 50%;
     border: none;
     filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, 0.25));
     padding: 1rem;
-    margin: 3rem;
+    margin: 2rem;
   }
 </style>
 
 <div class="app">
-  <h1 class="title">Annas komische Seite</h1>
   <div class="content">
-    <h2 class="counterShow">Counter: {count}</h2>
+    <h2 class="counterShow">{count}</h2>
     <button on:click={increment}>+1</button>
     <button on:click={decrement}>-1</button>
     <label for="counterSet">Set counter to:</label>
